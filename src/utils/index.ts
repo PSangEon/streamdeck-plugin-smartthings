@@ -7,7 +7,7 @@ import {
 export function isGlobalSettingsSet(
   settings: GlobalSettingsInterface | unknown
 ): settings is GlobalSettingsInterface {
-  return (settings as GlobalSettingsInterface).accessToken !== undefined
+  return (settings as GlobalSettingsInterface).proxyServer !== undefined
 }
 
 export function isDeviceSetting(
@@ -26,17 +26,17 @@ interface FetchAPI {
   body?: BodyInit
   endpoint: string
   method: string
-  accessToken: string
+  proxyServer: string
 }
 
-export async function fetchApi<T>({ body, endpoint, method, accessToken }: FetchAPI): Promise<T> {
+export async function fetchApi<T>({ body, endpoint, method, proxyServer}: FetchAPI): Promise<T> {
   return await (
-    await fetch(`https://api.smartthings.com/v1${endpoint}`, {
+    await fetch(`${proxyServer}${endpoint}`, {
       method,
-      headers: {
-        Authorization: `Bearer ${accessToken}`,
-      },
       body,
+            headers: {
+        Authorization: `Bearer token`,
+      },
     })
   ).json()
 }

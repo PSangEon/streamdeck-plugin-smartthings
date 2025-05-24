@@ -15,13 +15,13 @@ export class DeviceAction extends StreamDeckAction<Smartthings, DeviceAction> {
     const globalSettings = this.plugin.settingsManager.getGlobalSettings<GlobalSettingsInterface>()
 
     if (isGlobalSettingsSet(globalSettings)) {
-      const token = globalSettings.accessToken
+      const proxyserver = globalSettings.proxyServer
       const deviceId = payload.settings.deviceId
 
       const deviceStatus = await fetchApi<DeviceStatus>({
         endpoint: `/devices/${deviceId}/status`,
         method: 'GET',
-        accessToken: token,
+        proxyServer: proxyserver,
       })
 
       if (
@@ -39,7 +39,7 @@ export class DeviceAction extends StreamDeckAction<Smartthings, DeviceAction> {
             await fetchApi({
               endpoint: `/devices/${deviceId}/commands`,
               method: 'POST',
-              accessToken: token,
+              proxyServer: proxyserver,
               body: JSON.stringify([
                 {
                   capability: 'switch',
@@ -54,7 +54,7 @@ export class DeviceAction extends StreamDeckAction<Smartthings, DeviceAction> {
             await fetchApi({
               endpoint: `/devices/${deviceId}/commands`,
               method: 'POST',
-              accessToken: token,
+              proxyServer: proxyserver,
               body: JSON.stringify([
                 {
                   capability: 'switchLevel',
@@ -70,7 +70,7 @@ export class DeviceAction extends StreamDeckAction<Smartthings, DeviceAction> {
             await fetchApi({
               endpoint: `/devices/${deviceId}/commands`,
               method: 'POST',
-              accessToken: token,
+              proxyServer: proxyserver,
               body: JSON.stringify([
                 {
                   capability: 'switchLevel',
@@ -87,7 +87,7 @@ export class DeviceAction extends StreamDeckAction<Smartthings, DeviceAction> {
         await fetchApi({
           endpoint: `/devices/${deviceId}/commands`,
           method: 'POST',
-          accessToken: token,
+          proxyServer: proxyserver,
           body: JSON.stringify([
             {
               capability: 'doorControl',

@@ -58,8 +58,8 @@ class SmartthingsPI extends StreamDeckPropertyInspectorHandler {
   }
 
   private async onValidateButtonPressed() {
-    const accessToken = (<HTMLInputElement>document.getElementById('accesstoken'))?.value
-    this.settingsManager.setGlobalSettings<GlobalSettingsInterface>({ accessToken })
+    const proxyServer = (<HTMLInputElement>document.getElementById('proxyserver'))?.value
+    this.settingsManager.setGlobalSettings<GlobalSettingsInterface>({ proxyServer })
 
     let elements: SelectElement[] = []
 
@@ -68,7 +68,7 @@ class SmartthingsPI extends StreamDeckPropertyInspectorHandler {
         const res = await fetchApi<PagedResult<SceneSummary>>({
           endpoint: '/scenes',
           method: 'GET',
-          accessToken,
+          proxyServer,
         })
         elements = res.items.map((item) => ({
           id: item.sceneId,
@@ -80,7 +80,7 @@ class SmartthingsPI extends StreamDeckPropertyInspectorHandler {
         const res = await fetchApi<DeviceList>({
           endpoint: '/devices',
           method: 'GET',
-          accessToken,
+          proxyServer,
         })
         elements = res.items.map((item) => ({
           id: item.deviceId,
@@ -141,9 +141,9 @@ class SmartthingsPI extends StreamDeckPropertyInspectorHandler {
     const globalSettings = this.settingsManager.getGlobalSettings<GlobalSettingsInterface>()
 
     if (isGlobalSettingsSet(globalSettings)) {
-      const accessToken = globalSettings.accessToken
-      if (accessToken) {
-        ;(<HTMLInputElement>document.getElementById('accesstoken')).value = accessToken
+      const proxyServer = globalSettings.proxyServer
+      if (proxyServer) {
+        ;(<HTMLInputElement>document.getElementById('proxyserver')).value = proxyServer
       }
     }
   }

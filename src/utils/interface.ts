@@ -1,7 +1,7 @@
 import { SelectElement } from './index'
 
 export interface GlobalSettingsInterface {
-  accessToken: string
+  proxyServer: string
 }
 
 export interface CommonSettingsInterface {
