@@ -5,10 +5,12 @@
   "repository": "https://github.com/thibautsabot/streamdeck-plugin-smartthings",
   "scripts": {
     "browserify": "browserify build/smartthings-property-inspector.js > com.thibautsabot.streamdeck.smartthings.sdPlugin/public/dist/smartthings-property-inspector-bundle.js && browserify build/smartthings-plugin.js > com.thibautsabot.streamdeck.smartthings.sdPlugin/public/dist/smartthings-plugin-bundle.js",
-    "build": "npm run tsc && npm run browserify",
+    "build": "npm run tsc && npm run browserify && npm run zip && npm run fix",
     "lint": "eslint src/**/*.ts",
     "test": "jest --coverage",
-    "tsc": "tsc -p tsconfig.json"
+    "tsc": "tsc -p tsconfig.json",
+    "zip": "bz.exe c com.thibautsabot.streamdeck.smartthings.sdPlugin.zip com.thibautsabot.streamdeck.smartthings.sdPlugin",
+    "fix": "ren com.thibautsabot.streamdeck.smartthings.sdPlugin.zip example.STreamDeckPlugin"
   },
   "author": "Thibaut Sabot",
   "license": "MIT",
