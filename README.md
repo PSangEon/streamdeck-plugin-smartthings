@@ -17,27 +17,40 @@ Add your smartthings personal access token and get everything from your hub !
 
 <img width="484" alt="Screenshot 2021-03-29 at 11 11 33" src="https://user-images.githubusercontent.com/9283289/112819309-c0395e00-9084-11eb-8bec-68d0f7cd8527.png">
 
-## Access token
+## Access via Proxy Server
 
-A personal access token is required to fetch "smart things" from your hub.
+To fetch devices and scenes from your SmartThings hub, you need a **proxy server URL**.
 
-Head over to https://account.smartthings.com/tokens and connect to your Samsung / Smartthings account.
+We provide an example proxy server here:  
+👉 https://github.com/PSangEon/smartthigs-proxy
 
-Click on "GENERATE NEW TOKEN".
+Set up and run this proxy server by following the instructions in the repository.
 
-![Screenshot 2021-03-29 at 11 24 37](https://user-images.githubusercontent.com/9283289/112819317-c29bb800-9084-11eb-882e-d54a4198c498.png)
+Once running, copy the base URL of your proxy (for example: `https://your-proxy-server.com`).
 
+Enter this URL into the plugin or client that connects to SmartThings.
 
-Enter a name and tick at least "Devices" and "Scenes".
+✅ The proxy server will handle OAuth tokens securely on your behalf.
 
-**Your token is only stored on your machine !** It allows the plugin to control your devices, keep it secret. 
+**⚠️ Important:**  
+Only use proxy servers you trust.  
+The proxy has permission to control your devices, so keep the connection and server secure.
 
 ## Informations
 
-Made from https://github.com/thibautsabot/typescript-streamdeck-boilerplate/.
+This project is branched from:  
+https://github.com/thibautsabot/typescript-streamdeck-boilerplate/
 
-For now, you can only configure Devices and Scene.
+The reason for this fork is due to recent changes by Samsung SmartThings,  
+where **personal access tokens now expire after 24 hours**.  
+Because of this, a full **OAuth authentication flow** is required to ensure stable and secure long-term access.
 
-You can control any "switch" devices. In theory we can control anything but I don't have the devices to test it out.
+To handle this, we have added a **proxy server example** that manages OAuth on behalf of the client,  
+and the plugin is now designed to receive a **proxy server URL** instead of directly handling tokens.
 
-Any contribution to the project by opening a Pull Request or an Issue would be greatly appreciated.
+You can find the proxy server here:  
+👉 https://github.com/PSangEon/smartthigs-proxy
+
+⚠️ Please note:  
+I have made only **minor code modifications** in this fork.  
+Depending on the original repository owner's request, the public availability or details of this fork **may change** in the future.
