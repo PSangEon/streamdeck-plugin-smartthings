@@ -10,7 +10,7 @@
     "test": "jest --coverage",
     "tsc": "tsc -p tsconfig.json",
     "zip": "bz.exe c com.thibautsabot.streamdeck.smartthings.sdPlugin.zip com.thibautsabot.streamdeck.smartthings.sdPlugin",
-    "fix": "ren com.thibautsabot.streamdeck.smartthings.sdPlugin.zip example.STreamDeckPlugin"
+    "fix": "ren com.thibautsabot.streamdeck.smartthings.sdPlugin.zip example.StreamDeckPlugin"
   },
   "author": "Thibaut Sabot",
   "license": "MIT",
