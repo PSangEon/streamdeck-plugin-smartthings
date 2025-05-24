@@ -59,7 +59,8 @@ class SmartthingsPI extends StreamDeckPropertyInspectorHandler {
 
   private async onValidateButtonPressed() {
     const proxyServer = (<HTMLInputElement>document.getElementById('proxyserver'))?.value
-    this.settingsManager.setGlobalSettings<GlobalSettingsInterface>({ proxyServer })
+    const accessToken = (<HTMLInputElement>document.getElementById('accesstoken'))?.value
+    this.settingsManager.setGlobalSettings<GlobalSettingsInterface>({ proxyServer,accessToken })
 
     let elements: SelectElement[] = []
 
@@ -69,6 +70,7 @@ class SmartthingsPI extends StreamDeckPropertyInspectorHandler {
           endpoint: '/scenes',
           method: 'GET',
           proxyServer,
+          accessToken,
         })
         elements = res.items.map((item) => ({
           id: item.sceneId,
@@ -81,6 +83,7 @@ class SmartthingsPI extends StreamDeckPropertyInspectorHandler {
           endpoint: '/devices',
           method: 'GET',
           proxyServer,
+          accessToken,
         })
         elements = res.items.map((item) => ({
           id: item.deviceId,
@@ -142,8 +145,12 @@ class SmartthingsPI extends StreamDeckPropertyInspectorHandler {
 
     if (isGlobalSettingsSet(globalSettings)) {
       const proxyServer = globalSettings.proxyServer
+      const accessToken = globalSettings.accessToken
       if (proxyServer) {
         ;(<HTMLInputElement>document.getElementById('proxyserver')).value = proxyServer
+      }
+      if (accessToken) {
+        ;(<HTMLInputElement>document.getElementById('accesstoken')).value = accessToken
       }
     }
   }

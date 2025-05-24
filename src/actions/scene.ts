@@ -16,12 +16,14 @@ export class SceneAction extends StreamDeckAction<Smartthings, SceneAction> {
 
     if (isGlobalSettingsSet(globalSettings)) {
       const proxyServer = globalSettings.proxyServer
+      const accessToken = globalSettings.accessToken
       const sceneId = payload.settings.sceneId
 
       await fetchApi<Status>({
         endpoint: `/scenes/${sceneId}/execute`,
         proxyServer: proxyServer,
         method: 'POST',
+        accessToken: accessToken
       })
     }
   }

@@ -16,12 +16,14 @@ export class DeviceAction extends StreamDeckAction<Smartthings, DeviceAction> {
 
     if (isGlobalSettingsSet(globalSettings)) {
       const proxyserver = globalSettings.proxyServer
+      const accessToken = globalSettings.accessToken
       const deviceId = payload.settings.deviceId
 
       const deviceStatus = await fetchApi<DeviceStatus>({
         endpoint: `/devices/${deviceId}/status`,
         method: 'GET',
         proxyServer: proxyserver,
+        accessToken: accessToken,
       })
 
       if (
@@ -40,6 +42,7 @@ export class DeviceAction extends StreamDeckAction<Smartthings, DeviceAction> {
               endpoint: `/devices/${deviceId}/commands`,
               method: 'POST',
               proxyServer: proxyserver,
+              accessToken: accessToken,
               body: JSON.stringify([
                 {
                   capability: 'switch',
@@ -55,6 +58,7 @@ export class DeviceAction extends StreamDeckAction<Smartthings, DeviceAction> {
               endpoint: `/devices/${deviceId}/commands`,
               method: 'POST',
               proxyServer: proxyserver,
+              accessToken: accessToken,
               body: JSON.stringify([
                 {
                   capability: 'switchLevel',
@@ -71,6 +75,7 @@ export class DeviceAction extends StreamDeckAction<Smartthings, DeviceAction> {
               endpoint: `/devices/${deviceId}/commands`,
               method: 'POST',
               proxyServer: proxyserver,
+              accessToken: accessToken,
               body: JSON.stringify([
                 {
                   capability: 'switchLevel',
@@ -88,6 +93,7 @@ export class DeviceAction extends StreamDeckAction<Smartthings, DeviceAction> {
           endpoint: `/devices/${deviceId}/commands`,
           method: 'POST',
           proxyServer: proxyserver,
+          accessToken: accessToken,
           body: JSON.stringify([
             {
               capability: 'doorControl',

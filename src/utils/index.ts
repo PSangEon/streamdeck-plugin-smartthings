@@ -7,7 +7,8 @@ import {
 export function isGlobalSettingsSet(
   settings: GlobalSettingsInterface | unknown
 ): settings is GlobalSettingsInterface {
-  return (settings as GlobalSettingsInterface).proxyServer !== undefined
+  const s = settings as GlobalSettingsInterface
+  return s.proxyServer !== undefined && s.accessToken !== undefined
 }
 
 export function isDeviceSetting(
@@ -27,15 +28,16 @@ interface FetchAPI {
   endpoint: string
   method: string
   proxyServer: string
+  accessToken: string
 }
 
-export async function fetchApi<T>({ body, endpoint, method, proxyServer}: FetchAPI): Promise<T> {
+export async function fetchApi<T>({ body, endpoint, method, proxyServer, accessToken}: FetchAPI): Promise<T> {
   return await (
     await fetch(`${proxyServer}${endpoint}`, {
       method,
       body,
             headers: {
-        Authorization: `Bearer token`,
+        Authorization: `Bearer ${accessToken}`,
       },
     })
   ).json()
